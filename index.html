@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>161 Gilbert Street Loft 12</title>
+  <meta name="description" content="Bright, top-floor corner loft in SE/SOMA. Skylights, 1 bed, 1.5 bath, 2-car parking." />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="motion">
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-left">SE / SOMA</div>
+
+      <div class="header-center">
+        <span class="header-title">161 Gilbert Street Loft 12</span>
+      </div>
+
+      <div class="header-right">
+        <span class="header-kicker">LOFT LIVING</span>
+
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
+  <span class="icon-sun">☀</span>
+  <span class="icon-moon">🌙</span>
+</button>
+
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-grid">
+        <!-- Left -->
+        <div class="hero-copy">
+          <h1>Bright, top-floor<br/>corner loft</h1>
+
+          <div class="hero-subhead">
+            Skylights · 1 bed · 1.5 bath · 2-car parking
+          </div>
+
+          <p class="hero-lede">
+            Modern open kitchen, abundant light, and a large ~1,050 sq ft living space in a boutique 16-unit building.
+            Walk, bike, and transit-friendly.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn primary" href="#photos">View photos</a>
+            <a class="btn" href="one-by-one.html">View one-by-one</a>
+          </div>
+        </div>
+
+        <!-- Right -->
+        <div class="hero-media">
+          <img src="images/photo1.jpeg" alt="Main living area with skylights and fireplace" />
+        </div>
+
+        <!-- FULL-WIDTH stats row (spans under copy + photo) -->
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-label">Size</div>
+            <div class="stat-value">~1,050 sq ft</div>
+          </div>
+
+          <div class="stat">
+            <div class="stat-label">Parking</div>
+            <div class="stat-value">2-car</div>
+          </div>
+
+          <div class="stat">
+            <div class="stat-label">Transit score</div>
+            <div class="stat-value">91 / 100</div>
+          </div>
+
+          <div class="stat">
+            <div class="stat-label">Bike score</div>
+            <div class="stat-value">99 / 100</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Photos -->
+    <section class="section" id="photos">
+      <h2>Photos</h2>
+
+      <div class="grid" id="photoGrid">
+        <!-- populated by JS -->
+        <noscript>
+          <!-- Fallback: minimal set if JS disabled -->
+          <a class="tile" href="one-by-one.html"><img src="images/photo1.jpeg" alt="Photo 1" loading="lazy"></a>
+        </noscript>
+      </div>
+    </section>
+
+    <!-- Notes -->
+    <section class="section notes" id="notes">
+      <h2>Notes</h2>
+      <p>
+        The sunny living/dining/kitchen great room is anchored by a wood-burning fireplace and has floor-to-ceiling windows with a motorized shade.
+        Newer luxury LVP flooring throughout creates a clean, modern feel.
+      </p>
+      <p>
+        A modern kitchen with granite countertops, tile backsplash, ample cabinets, and newer black stainless steel appliances.
+        A garage has dishwasher, microwave, in-unit washer/dryer.
+      </p>
+      <p>
+        The airy upstairs loft has an en suite bath. Located in a boutique 16-unit building that includes a common roof deck with panoramic City views,
+        courtyard patio, an intercom entry, large storage room and 2-car side-by-side garage parking.
+      </p>
+
+      <ul>
+        <li>~1050 sq ft</li>
+        <li>Walk Score: 89 / 100</li>
+        <li>Transit Score: 91 / 100</li>
+        <li>Bike Score: 99 / 100</li>
+        <li>SF District 9; minutes from Daniel Webster elementary school.</li>
+      </ul>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="footer-title">Contact</div>
+        <a class="footer-email" href="mailto:loft12@landeland.com">loft12@landeland.com</a>
+        <div class="footer-note">© <span id="year"></span> Jason Lande. All rights reserved.</div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    (function () {
+      /* =========================
+         Theme toggle
+      ========================== */
+      const key = "loft12_theme";
+      const btn = document.getElementById("themeToggle");
+      const saved = localStorage.getItem(key);
+
+      function apply(theme) {
+        document.documentElement.setAttribute("data-theme", theme);
+        localStorage.setItem(key, theme);
+      }
+
+      if (!saved) {
+        const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
+      } else {
+        document.documentElement.setAttribute("data-theme", saved);
+      }
+
+      if (btn) {
+        btn.addEventListener("click", () => {
+          const current = document.documentElement.getAttribute("data-theme") || "dark";
+          apply(current === "dark" ? "light" : "dark");
+        });
+      }
+
+      /* =========================
+         Footer year
+      ========================== */
+      const y = document.getElementById("year");
+      if (y) y.textContent = new Date().getFullYear();
+
+      /* =========================
+         Photo grid builder (1..30)
+         Uses images/photo#.jpeg
+      ========================== */
+      const TOTAL = 30;
+      const grid = document.getElementById("photoGrid");
+      if (grid) {
+        const frag = document.createDocumentFragment();
+
+        for (let i = 1; i <= TOTAL; i++) {
+          const a = document.createElement("a");
+          a.className = "tile";
+          a.href = `one-by-one.html#photo${i}`;
+
+          const img = document.createElement("img");
+          img.src = `images/photo${i}.jpeg`;
+          img.alt = `Photo ${i}`;
+          img.loading = "lazy";
+
+          // If a given image is missing, hide that tile (so the grid doesn't look broken)
+          img.addEventListener("error", () => {
+            a.style.display = "none";
+          });
+
+          a.appendChild(img);
+          frag.appendChild(a);
+        }
+
+        grid.appendChild(frag);
+      }
+    })();
+  </script>
+</body>
+</html>
